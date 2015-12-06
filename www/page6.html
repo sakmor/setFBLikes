@@ -1,0 +1,29 @@
+
+<ons-page>
+    <ons-toolbar>
+        <div class="left">
+            <ons-back-button>Back</ons-back-button>
+        </div>
+        <div class="center">第四頁</div>
+    </ons-toolbar>
+
+    <div style="text-align: center">
+        <br>請將手機連線到WIFI:FBLIKE
+        <br>密碼請輸入：1234567890
+        <br>
+        <br>目前已連結<br><h0  style="color:blue"id="connectID"></h0>
+        <br>
+
+        <br>
+        <br>
+        <ons-button onclick="myNavigator.pushPage('page2.html')">
+            重新設定
+        </ons-button>
+        <ons-button onclick="getCurrentSSID()">
+            繼續
+        </ons-button>
+
+    </div>
+
+</ons-page>
+
