@@ -43,10 +43,11 @@ function getCurrentSSID() {
 
 //如果連結WIFI成功
 function ssidHandler(s) {
+    document.getElementById("yourSSID").innerHTML = s;
     //如果連結的SSID是 "FB_LIKE"
     if (s == "FB_LIKE06") {
         if (facebookID) {
-            myNavigator.pushPage('page5.html')
+            // myNavigator.pushPage('page5.html')
         }
     } else {
 
