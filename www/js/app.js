@@ -10,6 +10,7 @@ var wifiPassword;
  */
 function nextPage(url) {
 
+
     if (url) {
         jQuery.getJSON('https://graph.facebook.com/?id=' + url + '&access_token=275419469142574%7CsvPvM8W-2HC09K9DArg59h5NPE4', 'likes', function (result) {
             document.getElementById("facebookName").innerHTML = result.name;
@@ -56,7 +57,9 @@ function ssidHandler(s) {
 
 //設定機器
 function setup() {
-
+    ssid = $('#SSID').val();
+    wifiPassword = $('#PW').val();
+    console.log(ssid + "," + wifiPassword)
     $.ajax({
         url: "http://192.168.100.1:8080/Setting?SSID=" + ssid + "&PW=" + wifiPassword + "&FBID=" + facebookID,
         type: "GET",
