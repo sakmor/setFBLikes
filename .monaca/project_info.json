@@ -8,6 +8,9 @@
     "plugin_settings": {
         "com.pylonproducts.wifiwizard": {
             "variables": []
+        },
+        "mobi.monaca.plugins.Monaca": {
+            "variables": []
         }
     },
     "external_plugins": [
@@ -22,7 +25,8 @@
     "platform": [
         "android",
         "ios",
-        "winrt"
+        "winrt",
+        "chrome"
     ],
-    "name": "generated-1449391111-565c0b26fd173470162be530"
+    "name": "generated-1449904108-565c0b26fd173470162be530"
 }

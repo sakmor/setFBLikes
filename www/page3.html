@@ -5,11 +5,25 @@
         </div>
         <div class="center">第三頁</div>
     </ons-toolbar>
-
-    <div style="text-align: center">
+    <div id="loadIcon" style="text-align: center">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="spinner">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+        </div>
+    </div>
+    <div id="page3" style="visibility:hidden;text-align: center">
         <br>即將設定『機器』顯示：
         <br>
-        <img img id="qrLogo" height:12px; width:12px src="" />
+        
+		<img class="profile" img id="qrLogo" class="main-img" src="">        
         <p style="color:red" id="facebookName"></p>
         按讚人數：
         <h0 style="color:blue" id="facebookLikes"></h0>
@@ -20,9 +34,21 @@
         <ons-button onclick="myNavigator.popPage()">
             更換
         </ons-button>
-        <ons-button onclick="myNavigator.pushPage('page4.html')">
+        <ons-button onclick="myNavigator.pushPage('page4.html', {onTransitionEnd: function(){ ssidTest=setInterval(blinker, 1000); }  } )">
             正確
         </ons-button>
 
+    </div>
+    <div id="page3_bad" style="visibility:hidden;text-align: center">
+        <br>
+        <br>
+        <br><i style="color:red" class="fa fa-times fa-5x"></i>
+        <br>
+        輸入錯誤
+        <br>
+        <br>
+        <ons-button onclick="myNavigator.popPage()">
+            更換
+        </ons-button>
     </div>
 </ons-page>
