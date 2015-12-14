@@ -5,7 +5,42 @@ var facebooklikes;
 var ssid;
 var wifiPassword;
 var ssidTest;
+var facebookID_recent=[];
 
+//存檔系統
+//todo:整理、說明..還有ssid部份也要存檔
+//todo:還要清除...
+if(localStorage["facebookID_recent_storage"]){
+    facebookID_recent = JSON.parse(localStorage["facebookID_recent_storage"]);
+}
+
+var fromTag=false;
+
+/**
+ *  顯示最近輸入的Facebook帳號
+ *  todo:寫得有點奇怪..
+ */
+function recentFacebook(){
+    localStorage["facebookID_recent_storage"] = JSON.stringify(facebookID_recent);
+    var i=facebookID_recent.length;
+    $("#facebook_history").empty();
+    if(i>=1){
+        i--;
+        for(i;i+1>0;i--){
+            $("#facebook_history").append($('<li><a onclick="tagFunction(\'' + i+ '\')" value=0 class="tag" href="#">'+facebookID_recent[i].facebookName+'</a></li>')); 
+        }
+        // $('#facebook_history').addClass('animated bounceIn');
+    }
+
+}
+
+function tagFunction(mytext){
+
+     $('#facebookURL').val(facebookID_recent[mytext].facebookID);
+     nextPage(facebookID_recent[mytext].facebookID);
+     fromTag=true;
+
+}
 
 /**
  *  第二頁點擊繼續按鈕執行
@@ -16,7 +51,7 @@ function nextPage(url) {
     if (url) {
 
         jQuery.getJSON('https://graph.facebook.com/?id=' + url + '&access_token=275419469142574%7CsvPvM8W-2HC09K9DArg59h5NPE4', 'likes', function(result) {
-            document.getElementById("facebookName").innerHTML ='<i style="color:blue" class="fa fa-facebook-square"></i> '+ result.name;
+            document.getElementById("facebookName").innerHTML = '<i style="color:blue" class="fa fa-facebook-square"></i> ' + result.name;
             document.getElementById("facebookLikes").innerHTML = result.likes;
             $("#qrLogo").attr("src", "http://graph.facebook.com/" + result.username + "/picture?type=large");
             facebookID = result.id;
@@ -52,14 +87,18 @@ function loadTest() {
             $("#page3").css('visibility', 'visible');
             $("#loadIcon").css("display", "none");
             $("#page3_bad").css("display", "none");
-
+            
+            //如果不是透過點擊現有tag 加到最近輸入過的...
+            if(!fromTag){
+                 facebookID_recent.push({facebookName,facebookID});
+            }
         });
     } else {
-    //如果facebookName是undefined
-            $("#loadIcon").css("display", "none");
-            $("#page3").css("display", "none");
-            $("#page3_bad").css('visibility', 'visible');
-            $('#page3_bad').addClass('animated shake');
+        //如果facebookName是undefined
+        $("#loadIcon").css("display", "none");
+        $("#page3").css("display", "none");
+        $("#page3_bad").css('visibility', 'visible');
+        $('#page3_bad').addClass('animated shake');
 
     }
 
@@ -127,6 +166,19 @@ function openlink() {
 
 }
 
+/**
+ *  使app支援滑動上一頁  
+ */
+$.mobile.defaultPageTransition = 'slide';
+$(document).on('swiperight', function() {
+    recentFacebook();
+    myNavigator.popPage({
+        onTransitionEnd: function() {
+            facebookName = '';
+            document.getElementById('facebookURL').focus();
+        }
+    })
+});
 
 
 //todo:這行寫在這邊 會造成一開始就在偵測使用者的ssid
