@@ -1,4 +1,4 @@
-﻿<ons-page>
+<ons-page>
     <ons-toolbar>
         <div class="left">
             <ons-back-button onclick="facebookName='';document.getElementById('facebookURL').focus(); recentFacebook();">Back</ons-back-button>
@@ -31,12 +31,12 @@
         <br>是否正確？
         <br>
         <br>
-        <ons-button onclick="myNavigator.popPage( {onTransitionEnd: function(){ facebookName='';recentFacebook();}  } )">
+        <button class="button" onclick="myNavigator.popPage( {onTransitionEnd: function(){ facebookName='';recentFacebook();}  } )">
             更換
-        </ons-button>
-          <ons-button onclick="myNavigator.pushPage('page4.html', {onTransitionEnd: function(){ ssidTest=setInterval(blinker, 1000); fromTag=false;}  } )">
+        </button>
+        <button class="button" onclick="myNavigator.pushPage('page4.html', {onTransitionEnd: function(){ ssidTest=setInterval(blinker, 1000); fromTag=false;}  } )">
             正確
-        </ons-button>
+        </button>
 
     </div>
     <div id="page3_bad" style="visibility:hidden;text-align: center">
@@ -47,8 +47,8 @@
         輸入錯誤
         <br>
         <br>
-        <ons-button onclick="myNavigator.popPage( {onTransitionEnd: function(){ facebookName='';}  } )">
+         <button class="button" onclick="myNavigator.popPage( {onTransitionEnd: function(){ facebookName='';}  } )">
             更換
-        </ons-button>
+        </button>
     </div>
 </ons-page>
