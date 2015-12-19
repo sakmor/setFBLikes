@@ -5,15 +5,16 @@ var facebooklikes;
 var ssid;
 var wifiPassword;
 var ssidTest;
-var facebookID_recent = [];
+var facebookID_recent = new Array();
 var fromTag = false;
+
 
 
 //存檔系統
 //todo:整理、說明..還有ssid部份也要存檔
 //todo:還要清除...
-if (localStorage["facebookID_recent_storage"]) {
-    facebookID_recent = JSON.parse(localStorage["facebookID_recent_storage"]);
+if (localStorage["'facebookID_recent_storage'"]) {
+    facebookID_recent = JSON.parse(localStorage["'facebookID_recent_storage'"]);
 }
 
 
@@ -23,13 +24,14 @@ if (localStorage["facebookID_recent_storage"]) {
  *  todo:寫得有點奇怪..
  */
 function recentFacebook() {
-    localStorage["facebookID_recent_storage"] = JSON.stringify(facebookID_recent);
+
+
     var i = facebookID_recent.length;
     $("#facebook_history").empty();
     if (i >= 1) {
         i--;
         for (i; i + 1 > 0; i--) {
-            $("#facebook_history").append($('<li><a onclick="tagFunction(\'' + i + '\')" value=0 class="tag" href="#">' + facebookID_recent[i].facebookName + '</a></li>'));
+            $("#facebook_history").append($('<li><a onclick="tagFunction(\'' + i + '\')" value=0 class="tag" href="#">' + facebookID_recent[i].fbn + '</a></li>'));
         }
         // $('#facebook_history').addClass('animated bounceIn');
     }
@@ -39,8 +41,8 @@ function recentFacebook() {
 //如果使用者點擊tag標籤...
 function tagFunction(mytext) {
 
-    $('#facebookURL').val(facebookID_recent[mytext].facebookID);
-    nextPage(facebookID_recent[mytext].facebookID);
+    // $('#facebookURL').val(facebookID_recent[mytext].facebookID);
+    nextPage(facebookID_recent[mytext].fbi);
     fromTag = true;
 
 }
@@ -50,9 +52,7 @@ function tagFunction(mytext) {
  */
 function nextPage(url) {
 
-
     if (url) {
-
         jQuery.getJSON('https://graph.facebook.com/?id=' + url + '&access_token=275419469142574%7CsvPvM8W-2HC09K9DArg59h5NPE4', 'likes', function(result) {
             document.getElementById("facebookName").innerHTML = '<i style="color:blue" class="fa fa-facebook-square"></i> ' + result.name;
             document.getElementById("facebookLikes").innerHTML = result.likes;
@@ -73,11 +73,11 @@ function nextPage(url) {
 
     } else {
 
-        //當輸入為空值時 將輸入框搖動
+        // //當輸入為空值時 將輸入框搖動
         $('#facebookURL').removeClass('animated shake');
         setTimeout(
             function() {
-                $('#facebookURL').addClass('animated shake')
+                $('#facebookURL').addClass('animated shake');
             }, 1);
     }
 
@@ -98,15 +98,32 @@ function loadTest() {
 
             //如果不是透過點擊現有tag 加到最近輸入過的...
             if (!fromTag) {
+
                 //如果輸入超過20個..則移除第一項直到小於20
                 while (facebookID_recent.length >= 20) {
                     facebookID_recent.shift();
                 }
-                //將最新的數值丟到最近輸入過的..
+
+                //檢查是否重複直
+                //如果有重複，把舊的砍掉
+                var i = 0;
+                for (i; i < facebookID_recent.length; i++) {
+                    if (facebookID_recent[i].fbn == facebookName) {
+                        if (facebookID_recent.length > 1) {
+                            facebookID_recent.remove(i);
+                        }
+                    }
+                }
+                
+                //將新增的數值丟到arry內
                 facebookID_recent.push({
-                    facebookName,
-                    facebookID
+                    fbn: facebookName,
+                    fbi: facebookID
                 });
+
+                //回存至硬碟
+                localStorage["'facebookID_recent_storage'"] = JSON.stringify(facebookID_recent);
+
             }
         });
     } else {
@@ -118,7 +135,7 @@ function loadTest() {
 
     }
 
-
+    (polarbear)
     console.log("loading complete" + facebookName);
 }
 
@@ -158,7 +175,7 @@ function fail() {
 function setup() {
     ssid = $('#SSID').val();
     wifiPassword = $('#PW').val();
-    console.log(ssid + "," + wifiPassword)
+    console.log(ssid + "," + wifiPassword);
     $.ajax({
         url: "http://192.168.100.1:8080/Setting?SSID=" + ssid + "&PW=" + wifiPassword + "&FBID=" + facebookID,
         type: "GET",
@@ -193,5 +210,14 @@ $(document).on('swiperight', function() {
             facebookName = '';
             document.getElementById('facebookURL').focus();
         }
-    })
+    });
 });
+
+
+//==============array remove=====
+// Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+    var rest = this.slice((to || from) + 1 || this.length);
+    this.length = from < 0 ? this.length + from : from;
+    return this.push.apply(this, rest);
+};

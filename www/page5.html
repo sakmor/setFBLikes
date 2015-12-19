@@ -9,25 +9,25 @@
     <div style="text-align: center">
         <form id="signup" align="center" method="GET" action="http://192.168.4.1/Setting">
             <br>
-            <label>SSID:
+            <label>輸入WIFI網路名稱:
                 <br>
             </label>
-            <input type="text" id="SSID" name="SSID" MAXLENGTH=24 SIZE="24" />
+            <input class="text-input" type="text" id="SSID" name="SSID" MAXLENGTH=24 SIZE="24" />
             <br>
             <br>
-            <label>Password:
+            <label>輸入WIFI網路密碼:
                 <br>
             </label>
-            <input type="text" id="PW" name="PW" MAXLENGTH=24 SIZE="24" />
+            <input class="text-input" type="text" id="PW" name="PW" MAXLENGTH=24 SIZE="24" />
             <br>
         </form>
         <br>
-        <ons-button onclick="rest()">
+        <button class="button" onclick="rest()">
             Reset
-        </ons-button>
-        <ons-button onclick="setup()">
+        </button>
+        <button class="button" onclick="setup()">
             submit
-        </ons-button>
+        </button>
     </div>
 
 </ons-page>
