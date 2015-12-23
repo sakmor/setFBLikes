@@ -1,18 +1,18 @@
 <ons-page>
     <ons-toolbar>
         <div class="left">
-            <ons-back-button >Back</ons-back-button>
+            <ons-back-button>Back</ons-back-button>
         </div>
         <div class="center">第五頁</div>
     </ons-toolbar>
 
     <div style="text-align: center">
-        <form id="signup" align="center" method="GET" action="http://192.168.4.1/Setting">
+        <form id="signup" autocapitalize="off" align="center" method="GET" action="http://192.168.4.1/Setting">
             <br>
             <label>輸入WIFI網路名稱:
                 <br>
             </label>
-            <input class="text-input" type="text" id="SSID" name="SSID" MAXLENGTH=24 SIZE="24" />
+            <input class="text-input" autocapitalize="off" type="text" id="SSID" name="SSID" MAXLENGTH=24 SIZE="24" />
             <br>
             <br>
             <label>輸入WIFI網路密碼:
@@ -28,6 +28,10 @@
         <button class="button" onclick="setup()">
             submit
         </button>
+        <h0 style="color:red" id="emptyText"></h0>
+        <br>
+        <br>最近輸入過的WIFI:
+        <ul id="SSID_history" class="tags-list" style="text-align: center">
     </div>
 
 </ons-page>
