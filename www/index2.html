@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/app2.js"></script>
+</head>
+
+
+
+<body>
+    <div id="pasteDialog" class="modalDialog">
+        <div>
+            <a href="#page4" title="Close" class="close">X</a>
+            <h2>複製粉絲團網址</h2>
+            <li>點一下「設定」&gt; Wi-Fi，並確認 Wi-Fi 已開啟。當Olike顯示下面的狀態時，您的裝置將會搜尋到OLikeXXX網路。
+                <br>
+                <br>
+                <img alt=" " style=" width: 90%;
+    height: auto;max-width:375px;" src="/img/iphone6-ios9-settings-wifi-network.png" width="320">
+                <br>
+            </li>
+            <li>點一下您想要加入的 OLikeXXX 網路名稱。(XXX為數字序號，請看包裝內附序號貼紙)
+                <br>
+                <br>
+                <img alt=" " style=" width: 90%;
+    height: auto;max-width:375px;" src="/img/iphone6-ios9-settings-wifi-connected.png" width="320">
+                <br>
+        </div>
+    </div>
+    <div id="iosDialog" class="modalDialog">
+        <div>
+            <a href="#page6" title="Close" class="close">X</a>
+            <h2>IOS系統 連線至 OLike 網路</h2>
+            <li>點一下「設定」&gt; Wi-Fi，並確認 Wi-Fi 已開啟。當Olike顯示下面的狀態時，您的裝置將會搜尋到OLikeXXX網路。
+                <br>
+                <br>
+                <img alt=" " style=" width: 90%;
+    height: auto;max-width:375px;" src="/img/iphone6-ios9-settings-wifi-network.png" width="320">
+                <br>
+            </li>
+            <li>點一下您想要加入的 OLikeXXX 網路名稱。(XXX為數字序號，請看包裝內附序號貼紙)
+                <br>
+                <br>
+                <img alt=" " style=" width: 90%;
+    height: auto;max-width:375px;" src="/img/iphone6-ios9-settings-wifi-connected.png" width="320">
+                <br>
+            </li>
+            <li>
+                並在下面的畫面中，輸入Olike按讚機密碼:1234567890。
+                <br>
+                <img alt=" " style=" width: 90%;
+    height: auto;max-width:375px;" src="/img/iphone6-ios9-settings-wifi-password.png" width="320">
+                <br>
+            </li>
+            <li>
+                <p>加入該網路之後，會在該網路旁邊看到 <img alt=" " src="/img/wifi-connected-checkmark-icon.png" width="20">，並在顯示器的左上側看到 <img height="15" src="/img/wifi_inline_icon.png" width="20">。</p>
+                <br>
+                <br>
+                <img alt=" " style=" width: 90%;
+    height: auto;max-width:375px;" src="/img/iphone6-ios9-settings-wifi-connected.png" width="320">
+                <br>
+            </li>
+        </div>
+    </div>
+    <div id="andDialog" class="modalDialog">
+        <div>
+            <a href="#page6" title="Close" class="close">X</a>
+            <h2>安卓系統 連線至 OLike 網路</h2>
+            <li>點一下「設定」&gt; Wi-Fi，並確認 Wi-Fi 已開啟。當Olike顯示下面的狀態時，您的裝置將會搜尋到OLikeXXX網路。
+                <br>
+                <br>
+                <img alt=" " style=" width: 90%;
+    height: auto;max-width:375px;" src="/img/android-settings-wifi-network.png" width="320">
+                <br>
+            </li>
+            <li>點一下您想要加入的 OLikeXXX 網路名稱。(XXX為數字序號，請看包裝內附序號貼紙)
+                <br>
+                <br>
+                <img alt=" " style=" width: 90%;
+    height: auto;max-width:375px;" src="/img/android-settings-wifi-connected.png" width="320">
+                <br>
+            </li>
+            <li>
+                並在下面的畫面中，輸入Olike按讚機密碼:1234567890。
+                <br>
+                <img alt=" " style=" width: 90%;
+    height: auto;max-width:375px;" src="/img/android-settings-wifi-password.png" width="320">
+                <br>
+            </li>
+            <li>
+                <p>加入該網路之後，會在該網路旁邊看到 <img alt=" " src="/img/wifi-connected-checkmark-icon.png" width="20">，並在顯示器的左上側看到 <img height="15" src="/img/wifi_inline_icon.png" width="20">。</p>
+                <br>
+                <br>
+                <img alt=" " style=" width: 90%;
+    height: auto;max-width:375px;" src="/img/android-settings-wifi-connected.png" width="320">
+                <br>
+            </li>
+        </div>
+    </div>
+    <div id="finalDialog" class="modalDialog">
+        <div>
+            <a href="#page7" title="Close" class="close">X</a>
+            <h2>即將設定OLike按讚機為...</h2>
+            <li>粉絲團帳號:<b><font color="blue"><var id="facebookName"></b></font>
+            </li>
+            <li>WIFI帳號:<b><font color="blue"><var id="wifissid"></b></font>
+            </li>
+            <li>WIFI密碼:<b><font color="blue"><var id="wifiPassword"></b></font>
+            </li>
+            <button class="button" data-inline="true" onclick="setup()">
+                確定
+            </button>
+            <button class="button" data-inline="true" onclick="location.href='#page7'">
+                取消
+            </button>
+        </div>
+    </div>
+    <div id="failDialog" class="modalDialog">
+        <div>
+            <a href="#page5" title="Close" class="close">X</a>
+            <h2>以下為連結失敗的可能原因</h2>
+            <li>輸入的臉書帳號網址並不是粉絲團:Olike僅支援粉絲團的按讚數量顯示。</li>
+            <li>所使用的網路訊號不穩定:建議返回上一頁重新連結。</li>
+            </li>
+        </div>
+    </div>
+    <div id="wifiDialog" class="modalDialog">
+        <div>
+            <a href="#page6" title="Close" class="close">X</a>
+            <h2>提示</h2> 已將瀏覽本設定網頁的裝置
+            <br>(手機/平板/電腦)
+            <br>連結到OLike的wifi了嗎?
+            <br>
+            <br>
+            <button class="button" data-inline="true" onclick="location.href='#page7'">
+                確定
+            </button>
+            <button class="button" data-inline="true" onclick="location.href='#page6'">
+                取消
+            </button>
+        </div>
+    </div>
+    <!--=================================================================================================================-->
+    <div data-role="page" id="page1">
+        <div data-role="header">
+            <h1>OLike設定 1/8</h1>
+        </div>
+        <div data-role="main" class="ui-content" style="text-align: center">
+            歡迎使用Olike按讚機設定頁面
+            <br> 我們將引導您設定您的Olike機器。
+            <br>
+            <br>
+            <img style=" width: 100%;
+    height: auto;max-width:500px;" src="img/img_page3.png">
+            <br>
+            <a href="#page2" data-inline="true" data-role="button" data-transition="slide">繼續</a>
+        </div>
+        <br>
+
+    </div>
+    </div>
+
+    <div data-role="page" id="page2">
+        <div data-role="header">
+            <h1>OLike設定 2/8</h1>
+            <a href="#page1" data-icon="arrow-l" data-transition="slide" data-direction="reverse">上一頁</a>
+        </div>
+        <div data-role="main" class="ui-content" style="text-align: center">
+            在開始設定OLike按讚機前，請先確認您擁有以下設備與環境：
+            <br>
+            <br>
+            <div data-role="list" style="text-align: center">
+                <font style="color:#476e8e">
+                <li style="list-style-type: none;"><i class="fa fa-thumbs-o-up"></i> 已取得OLike按讚機，並且擁有一條Micro usb連結線與行動電源 。</li><br>
+                <li style="list-style-type: none;"><i class="fa fa-laptop"></i> 擁有Wifi功能的智慧型手機、平板，或電腦（初次設定時使用）。</li><br>
+                <li style="list-style-type: none;"><i class="fa fa-wifi"></i> 擁有訊號穩定並可連結至網際網路的WIFI帳號及密碼（供OLike連結網路用）。</li>
+                </font>
+            </div>
+
+            <br>
+            <a href="#page3" data-inline="true" data-role="button" data-transition="slide">繼續</a>
+        </div>
+    </div>
+
+    <div data-role="page" id="page3">
+        <div data-role="header">
+            <h1>OLike設定 3/8</h1>
+            <a href="#page2" data-icon="arrow-l" data-transition="slide" data-direction="reverse">上一頁</a>
+        </div>
+        <div data-role="main" class="ui-content" style="text-align: center">
+            請將您的OLike按讚機插上電源後，等待螢幕出現如下的動畫後點擊繼續按鈕。
+            <br>
+            <br><img style=" width: 100%;
+    height: auto;max-width:500px;" src="img/img_wait.gif" width="320">
+            <br>
+            <a href="#page4" data-inline="true" data-role="button" data-transition="slide">繼續</a>
+        </div>
+    </div>
+
+    <div data-role="page" id="page4">
+        <div data-role="header">
+            <h1>OLike設定 4/8</h1>
+            <a href="#page3" data-icon="arrow-l" data-transition="slide" data-direction="reverse">上一頁</a>
+        </div>
+        <div data-role="main" class="ui-content" style="text-align: center">
+            輸入Facebook粉絲團帳號，或直接貼上網址。
+            <i class="fa fa-hand-o-right"></i> <a href="#pasteDialog">詳細說明</a>
+            <br>
+            <br>
+
+            <input id="facebookURL" data-role="fieldcontain" data-clear-btn="true" type="text" placeholder="輸入粉絲團帳號" value="" style="text-align: center">
+
+            <br>
+            <a href="" data-inline="true" data-role="button" data-transition="slide" onClick="checkFB(document.getElementById('facebookURL').value);">繼續</a>
+            <h0 style="color:red" id="emptyText"></h0>
+            <br>
+            <br>最近輸入過的紛絲團:
+            <br>
+            <ul id="facebook_history" class="tags-list" style="text-align: center">
+
+
+        </div>
+    </div>
+
+    <div data-role="page" id="page5">
+        <div data-role="header">
+            <h1>OLike設定 5/8</h1>
+            <a href="#page4" data-icon="arrow-l" data-transition="slide" data-direction="reverse">上一頁</a>
+        </div>
+        <div data-role="main" class="ui-content" style="text-align: center">
+            <div id="loadIcon" style="text-align: center">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="spinner">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+            </div>
+            <div id="page5_get" style="text-align: center">
+                <br>即將設定『機器』顯示：
+                <br>
+
+                <img id="qrLogo" src="">
+                <p style="color:red" id="facebookName"></p>
+                按讚人數：
+                <h0 style="color:blue" id="facebookLikes"></h0>
+                <br>
+                <br>是否正確？
+                <br>
+                <br>
+                <a href="#page4" data-inline="true" data-role="button" data-transition="slide" data-direction="reverse">更換</a>
+                <a href="#page6" data-inline="true" data-role="button" data-transition="slide">正確</a>
+            </div>
+
+            <div id="page5_bad" style="text-align: center">
+                <br>
+                <br>
+                <br><i style="color:red" class="fa fa-times fa-5x"></i>
+                <br> 輸入錯誤
+                <i class="fa fa-hand-o-right"></i> <a href="#failDialog">詳細說明</a>
+                <br>
+                <br>
+                <a href="#page4" data-inline="true" data-role="button" data-transition="slide" data-direction="reverse">
+                    重新輸入</a>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="page" id="page6">
+        <div data-role="header">
+            <h1>OLike設定 6/8</h1>
+            <a href="#page5" data-icon="arrow-l" data-transition="slide" data-direction="reverse">上一頁</a>
+        </div>
+        <div data-role="main" class="ui-content" style="text-align: center">
+            現在請將目前瀏覽網頁的裝置，WIFI切換至OLike。
+            <br>
+            <br>
+            <i class="fa fa-apple"></i> <a href="#iosDialog">蘋果手機切換WIFI教學</a>
+            <br>
+            <i class="fa fa-android"></i> <a href="#andDialog">安卓手機切換WIFI教學</a>
+            <br>
+            <br>
+            <font style="color:#476e8e">
+            <li>OLike所使用的Wifi帳號為:<b>OLikeXXXX</b>
+
+                <li>OLike所使用的Wifi密碼為:<b>1234567890</b></li>
+                <font color="#bababa"> (XXX為序號，例如OLike0119)</font></font>
+            <br>
+            <br>
+
+            <a href="#wifiDialog" data-inline="true" data-role="button">繼續</a>
+        </div>
+    </div>
+
+    <div data-role="page" id="page7">
+        <div data-role="header">
+            <h1>OLike設定 7/8</h1>
+            <a href="#page5" data-icon="arrow-l" data-transition="slide" data-direction="reverse">上一頁</a>
+        </div>
+        <div data-role="main" class="ui-content" style="text-align: center">
+            <div style="text-align: center">
+                <form id="signup" align="center" method="GET" action="http://192.168.4.1/Setting">
+                    現在將設定OLike在讀取Facebook粉絲團按讚數量訊息時，所使用的WIFI網路名稱與密碼。 <font style="color:#476e8e">
+                    <br>
+                    <br>
+                    <label><i class="fa fa-wifi"></i> 輸入WIFI網路名稱:
+                        <br>
+                    </label>
+                    <input id="SSID" class="text-input" name="SSID" data-role="fieldcontain" data-clear-btn="true" type="text" placeholder="輸入wifi帳號" value="" style="text-align: center">
+
+                    <br>
+                    <br>
+                    <label><i class="fa fa-key"></i> 輸入WIFI網路密碼:
+                        <br>
+                    </label>
+                    <input id="PW" class="text-input" name="PW" data-role="fieldcontain" data-clear-btn="true" type="text" placeholder="輸入wifi密碼" value="" style="text-align: center">
+                    <br></font>
+                </form>
+                <br>
+                <button class="button" data-inline="true" onclick="rest()">
+                    重新輸入
+                </button>
+                <button class="button" data-inline="true" onclick="submit()">
+                    送交設定
+                </button>
+                <br>最近輸入過的WIFI:
+                <ul id="SSID_history" class="tags-list" style="text-align: center">
+            </div>
+        </div>
+    </div>
+
+    <div data-role="page" id="page8">
+        <div data-role="header">
+            <h1>OLike設定 8/8</h1>
+            <a href="#page7" data-icon="arrow-l" data-transition="slide" data-direction="reverse">上一頁</a>
+        </div>
+        <div id=finalgood data-role="main" class="ui-content" style="text-align: center">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br><i class="fa fa-smile-o fa-5x"></i>
+            <h2>恭喜完成設定</h2>
+        </div>
+        <div id="loadIcon2" style="text-align: center">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="spinner">
+                資料傳輸中，請稍後...
+                <br>
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+
+    </div>
+    <!--
+<div id="dialog" title="基本的对话框">
+    <h2>連線至 Wi-Fi 網路</h2>
+    <ol>
+        <li>點一下「設定」&gt; Wi-Fi，並確認 Wi-Fi 已開啟。您的裝置將會搜尋可用的 Wi-Fi 網路。
+            <br>
+            <img alt=" " src="/img/iphone6-ios9-settings-wifi-network.png" width="320"></li>
+        <li>點一下您想要加入的 Wi-Fi 網路名稱。
+            <br>
+            <img alt=" " src="/img/iphone6-ios9-settings-wifi-connected.png" width="320"></li>
+    </ol>
+    <p>加入該網路之後，會在該網路旁邊看到 <img alt=" " src="/img/wifi-connected-checkmark-icon.png" width="20">，並在顯示器的左上側看到 <img height="15" src="/img/wifi_inline_icon.png" width="20">。</p>
+</div>
+-->
+</body>
+
+</html>

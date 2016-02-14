@@ -8,7 +8,16 @@ var ssidTest;
 var facebookID_recent = new Array();
 var fromTag = false;
 
+$body = $("body");
 
+$(document).on({
+    ajaxStart: function () {
+        $body.addClass("loading");
+    },
+    ajaxStop: function () {
+        $body.removeClass("loading");
+    }
+});
 
 //存檔系統
 //todo:整理、說明..還有ssid部份也要存檔
@@ -53,7 +62,7 @@ function tagFunction(mytext) {
 function nextPage(url) {
 
     if (url) {
-        jQuery.getJSON('https://graph.facebook.com/?id=' + url + '&access_token=275419469142574%7CsvPvM8W-2HC09K9DArg59h5NPE4', 'likes', function(result) {
+        jQuery.getJSON('https://graph.facebook.com/?id=' + url + '&access_token=275419469142574%7CsvPvM8W-2HC09K9DArg59h5NPE4', 'likes', function (result) {
             document.getElementById("facebookName").innerHTML = '<i style="color:blue" class="fa fa-facebook-square"></i> ' + result.name;
             document.getElementById("facebookLikes").innerHTML = result.likes;
             $("#qrLogo").attr("src", "http://graph.facebook.com/" + result.username + "/picture?type=large");
@@ -64,7 +73,7 @@ function nextPage(url) {
 
 
         myNavigator.pushPage('page3.html', {
-            onTransitionEnd: function() {
+            onTransitionEnd: function () {
                 loadTest();
             }
         });
@@ -76,7 +85,33 @@ function nextPage(url) {
         // //當輸入為空值時 將輸入框搖動
         $('#facebookURL').removeClass('animated shake');
         setTimeout(
-            function() {
+            function () {
+                $('#facebookURL').addClass('animated shake');
+            }, 1);
+    }
+
+
+}
+
+function nextPage2(url) {
+
+    if (url) {
+        jQuery.getJSON('https://graph.facebook.com/?id=' + url + '&access_token=275419469142574%7CsvPvM8W-2HC09K9DArg59h5NPE4', 'likes', function (result) {
+            facebookID = result.id;
+            facebookName = result.name;
+            facebooklikes = result.likes;
+            document.getElementById("getFbID").innerHTML = "抓取到" + facebooklikes + "個讚 ";
+        });
+
+
+
+
+    } else {
+
+        // //當輸入為空值時 將輸入框搖動
+        $('#facebookURL').removeClass('animated shake');
+        setTimeout(
+            function () {
                 $('#facebookURL').addClass('animated shake');
             }, 1);
     }
@@ -90,7 +125,7 @@ function nextPage(url) {
 function loadTest() {
     //如果facebookName不是undefined
     if (facebookName) {
-        $("#qrLogo").load("http://graph.facebook.com/" + facebookName + "/picture?type=large", function() {
+        $("#qrLogo").load("http://graph.facebook.com/" + facebookName + "/picture?type=large", function () {
             $('#page3').addClass('animated fadeInUpBig');
             $("#page3").css('visibility', 'visible');
             $("#loadIcon").css("display", "none");
@@ -114,7 +149,7 @@ function loadTest() {
                         }
                     }
                 }
-                
+
                 //將新增的數值丟到arry內
                 facebookID_recent.push({
                     fbn: facebookName,
@@ -179,10 +214,28 @@ function setup() {
     $.ajax({
         url: "http://192.168.100.1:8080/Setting?SSID=" + ssid + "&PW=" + wifiPassword + "&FBID=" + facebookID,
         type: "GET",
-        success: function(response) {
+        success: function (response) {
             console.log(response); //預期回覆:想要回覆的訊息!!!
         },
-        error: function() {
+        error: function () {
+            console.log("ajax error!");
+        }
+    });
+}
+//設定機器
+function setup2() {
+
+    ssid = $('#SSID').val();
+    wifiPassword = $('#PW').val();
+
+
+    $.ajax({
+        url: "http://192.168.100.1:8080/Setting?SSID=" + ssid + "&PW=" + wifiPassword + "&FBID=" + facebookID,
+        type: "GET",
+        success: function (response) {
+            console.log(response); //預期回覆:想要回覆的訊息!!!
+        },
+        error: function () {
             console.log("ajax error!");
         }
     });
@@ -202,21 +255,21 @@ function openlink() {
 /**
  *  使app支援滑動上一頁  
  */
-$.mobile.defaultPageTransition = 'slide';
-$(document).on('swiperight', function() {
-    recentFacebook();
-    myNavigator.popPage({
-        onTransitionEnd: function() {
-            facebookName = '';
-            document.getElementById('facebookURL').focus();
-        }
-    });
-});
+//$.mobile.defaultPageTransition = 'slide';
+//$(document).on('swiperight', function () {
+//    recentFacebook();
+//    myNavigator.popPage({
+//        onTransitionEnd: function () {
+//            facebookName = '';
+//            document.getElementById('facebookURL').focus();
+//        }
+//    });
+//});
 
 
 //==============array remove=====
 // Array Remove - By John Resig (MIT Licensed)
-Array.prototype.remove = function(from, to) {
+Array.prototype.remove = function (from, to) {
     var rest = this.slice((to || from) + 1 || this.length);
     this.length = from < 0 ? this.length + from : from;
     return this.push.apply(this, rest);
