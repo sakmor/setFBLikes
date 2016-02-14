@@ -28,6 +28,8 @@ if (localStorage["'SSID_recent_storage'"]) {
 function tagFunction_WIFI(mytext) {
     wifissid = SSID_recent[mytext].ssid;
     wifiPassword = SSID_recent[mytext].pawd;
+    $("#wifissid").text(wifissid);
+    $("#wifiPassword").text(wifiPassword);
     $.mobile.changePage("#finalDialog", {});
     //    $('#SSID').val(SSID_recent[mytext].ssid);
     //    $('#PW').val(SSID_recent[mytext].pawd);
@@ -101,6 +103,12 @@ $(document).on("pageshow", "#page7", function () {
 //當跑到第八頁時...
 $(document).on("pageshow", "#page8", function () {
 
+    setTimeout(function () {
+
+        $("#loadIcon2").hide();
+        $("#finalgood").show();
+        $("#finalgood").addClass('animated bounceIn');
+    }, 3000);
 });
 
 /**
@@ -274,30 +282,6 @@ function rest() {
 }
 //按下送交
 function submit() {
-    //如果輸入超過20個..則移除第一項直到小於20
-    while (facebookID_recent.length >= 20) {
-        facebookID_recent.shift();
-    }
-    //檢查是否重複直
-    //如果有重複，把舊的砍掉
-    var i = 0;
-
-
-    for (i; i < SSID_recent.length; i++) {
-        if (SSID_recent[i].ssid == wifissid) {
-            if (SSID_recent.length > 1) {
-                SSID_recent.remove(i);
-            }
-        }
-    }
-    //將新增的數值丟到arry內
-    SSID_recent.push({
-        ssid: $('#SSID').val(),
-        pawd: $('#PW').val()
-    });
-    //回存至硬碟
-    localStorage["'SSID_recent_storage'"] = JSON.stringify(SSID_recent);
-
     if (!$('#SSID').val() | !$('#PW').val()) {
         if (!$('#SSID').val()) {
             $('#SSID').removeClass('animated shake');
@@ -319,6 +303,28 @@ function submit() {
         $("#wifissid").text(wifissid);
         $("#wifiPassword").text(wifiPassword);
         $.mobile.changePage("#finalDialog", {});
+
+        //如果輸入超過20個..則移除第一項直到小於20
+        while (facebookID_recent.length >= 20) {
+            facebookID_recent.shift();
+        }
+        //檢查是否重複直
+        //如果有重複，把舊的砍掉
+        var i = 0;
+        for (i; i < SSID_recent.length; i++) {
+            if (SSID_recent[i].ssid == wifissid) {
+                if (SSID_recent.length > 1) {
+                    SSID_recent.remove(i);
+                }
+            }
+        }
+        //將新增的數值丟到arry內
+        SSID_recent.push({
+            ssid: $('#SSID').val(),
+            pawd: $('#PW').val()
+        });
+        //回存至硬碟
+        localStorage["'SSID_recent_storage'"] = JSON.stringify(SSID_recent);
     }
 
 
