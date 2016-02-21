@@ -12,6 +12,36 @@ var SSID_recent = new Array();
 var fromTag = false;
 
 
+window.onload = function () {
+
+
+
+
+    if (parent.location.hash == "#iosDialog") {
+        $.mobile.changePage("#page6", {
+
+        });
+    }
+    if (parent.location.hash == "#andDialog") {
+        $.mobile.changePage("#page6", {});
+    }
+    if (parent.location.hash == "#failDialog") {
+        $.mobile.changePage("#page4", {});
+    }
+    if (parent.location.hash == "#page5") {
+        $.mobile.changePage("#page4", {});
+    }
+    if (parent.location.hash == "#pasteDialog") {
+        $.mobile.changePage("#page4", {});
+    }
+    if (parent.location.hash == "#wifiDialog") {
+        $.mobile.changePage("#page6", {});
+    }
+    if (parent.location.hash == "#finalDialog") {
+        $.mobile.changePage("#page7", {});
+    }
+
+}
 
 //存檔系統
 //todo:整理、說明..還有ssid部份也要存檔
@@ -26,6 +56,7 @@ if (localStorage["'SSID_recent_storage'"]) {
 
 //如果使用者點擊tag標籤...(最近輸入的SSID帳號)
 function tagFunction_WIFI(mytext) {
+
     wifissid = SSID_recent[mytext].ssid;
     wifiPassword = SSID_recent[mytext].pawd;
     $("#wifissid").text(wifissid);
@@ -96,19 +127,92 @@ $(document).on("pageshow", "#page5", function () {
     }
     setTimeout(loadTest, 1000);
 });
+
+function blink() {
+    $('#waitWifiBtn').fadeOut(500);
+    $('#waitWifiBtn').fadeIn(500);
+}
+
+
+//當跑到第六頁時...
+$(document).on("pagecreate", "#page6", function () {
+
+    var aInterval = setInterval(blink, 1000);
+    $("#waitWifiBtn").removeClass('animated bounceIn');
+
+    jQuery.getJSON('http://192.168.100.1:8080/', function (result) {
+        //如果收到OLike了
+        if (result.id == "OLike") {
+            clearInterval(aInterval);
+            $("#waitWifiBtn").text("繼續");
+            $("#waitWifiBtn").addClass('animated bounceIn');
+            $("#waitWifiBtn").attr("href", "#page7");
+
+            //告訴機器我已經收到OLike了
+            $.ajax({
+                url: "http://192.168.100.1:8080/OLike_Receive1",
+                type: "GET",
+                success: function (response) {
+                    //                alert(response); 
+                },
+                error: function () {
+                    //                alert("ajax error!");
+                }
+            });
+        }
+    });
+
+});
+
 //當跑到第七頁時...
 $(document).on("pageshow", "#page7", function () {
     recentSSID();
 });
+
 //當跑到第八頁時...
 $(document).on("pageshow", "#page8", function () {
 
-    setTimeout(function () {
+    $.ajax({
+        url: "http://192.168.100.1:8080/Setting?SSID=" + wifissid + "&PW=" + wifiPassword + "&FBID=" + facebookID,
+        type: "GET",
+        success: function (response) {
+            if (response.id == "go") {
+                console.log(response.id);
+                $("#loadIcon2").hide();
+                $("#finalgood").show();
+                $("#finalgood").addClass('animated bounceIn')
 
-        $("#loadIcon2").hide();
-        $("#finalgood").show();
-        $("#finalgood").addClass('animated bounceIn');
-    }, 3000);
+                //告訴機器我已經收到go了
+                $.ajax({
+                    url: "http://192.168.100.1:8080/OLike_Receive2",
+                    type: "GET",
+                    success: function (response) {
+                        //                alert(response); 
+                    },
+                    error: function () {
+                        //                alert("ajax error!");
+                    }
+                });
+            } else {
+                alert("訊息代碼: " + response.id + " 請洽服務人員")
+                $.mobile.changePage("#page7", {
+                    transition: "slide"
+                });
+            }
+        },
+        error: function () {
+            alert("連線失敗");
+            $.mobile.changePage("#page7", {
+                transition: "slide"
+            });
+        }
+    });
+
+    //    setTimeout(function () {
+    //        $("#loadIcon2").hide();
+    //        $("#finalgood").show();
+    //        $("#finalgood").addClass('animated bounceIn');
+    //    }, 3000);
 });
 
 /**
@@ -333,16 +437,6 @@ function submit() {
 //設定機器
 function setup() {
 
-    $.ajax({
-        url: "http://192.168.100.1:8080/Setting?SSID=" + wifissid + "&PW=" + wifiPassword + "&FBID=" + facebookID,
-        type: "GET",
-        success: function (response) {
-            console.log(response); //預期回覆:想要回覆的訊息!!!
-        },
-        error: function () {
-            console.log("ajax error!");
-        }
-    });
     $("#loadIcon2").show();
     $("#finalgood").hide();
     $.mobile.changePage("#page8", {});
