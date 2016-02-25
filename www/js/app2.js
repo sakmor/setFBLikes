@@ -139,21 +139,23 @@ $(document).on("pagecreate", "#page6", function () {
 
     var aInterval = setInterval(blink, 1000);
     $("#waitWifiBtn").removeClass('animated bounceIn');
+	console.log("http://192.168.100.1:8080/OLike");
 
-    jQuery.getJSON('http://192.168.100.1:8080/', function (result) {
+    jQuery.getJSON('http://192.168.100.1:8080/OLike', function (result) {
         //如果收到OLike了
         if (result.id == "OLike") {
             clearInterval(aInterval);
             $("#waitWifiBtn").text("繼續");
             $("#waitWifiBtn").addClass('animated bounceIn');
             $("#waitWifiBtn").attr("href", "#page7");
-
+                $.mobile.changePage("#page7", {
+                    transition: "slide"
+                });
             //告訴機器我已經收到OLike了
             $.ajax({
                 url: "http://192.168.100.1:8080/OLike_Receive1",
                 type: "GET",
                 success: function (response) {
-                    //                alert(response); 
                 },
                 error: function () {
                     //                alert("ajax error!");
@@ -164,6 +166,8 @@ $(document).on("pagecreate", "#page6", function () {
 
 });
 
+
+
 //當跑到第七頁時...
 $(document).on("pageshow", "#page7", function () {
     recentSSID();
@@ -173,7 +177,7 @@ $(document).on("pageshow", "#page7", function () {
 $(document).on("pageshow", "#page8", function () {
 
     $.ajax({
-        url: "http://192.168.100.1:8080/Setting?SSID=" + wifissid + "&PW=" + wifiPassword + "&FBID=" + facebookID,
+        url: "http://192.168.100.1:8080/SetApp?SSID=" + wifissid + "&PW=" + wifiPassword + "&FBID=" + facebookID,
         type: "GET",
         success: function (response) {
             if (response.id == "go") {
@@ -214,6 +218,35 @@ $(document).on("pageshow", "#page8", function () {
     //        $("#finalgood").addClass('animated bounceIn');
     //    }, 3000);
 });
+
+/**
+ *  小八測試
+ */
+function testButton() {
+ jQuery.getJSON('http://192.168.100.1:8080/OLike', function (result) {
+		console.log("testButton pressed");
+        //如果收到OLike了
+        if (result.id == "OLike") {
+
+            //告訴機器我已經收到OLike了
+            $.ajax({
+                url: "http://192.168.100.1:8080/OLike_Receive1",
+                type: "GET",
+                success: function (response) {
+                },
+                error: function () {
+                    //                alert("ajax error!");
+                }
+            });
+
+			//有收到OLike就可以換頁了
+			$.mobile.changePage("#page7", {
+                    transition: "slide"
+                });
+        }
+    });
+
+}
 
 /**
  *  顯示最近輸入的WIFI帳號
